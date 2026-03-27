@@ -60,6 +60,36 @@ export default function App() {
   const [currentScheme, setCurrentScheme] = useState(colorSchemes[0]);
   const [isAnimating, setIsAnimating] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
+  const [currentIntro, setCurrentIntro] = useState('');
+
+  const llmIntros = [
+    'Bold of you to ask. Your job title is:',
+    'I checked with ChatGPT, Gemini, and Claude. Your job title is:',
+    'I checked with Claude, Grok, and Perplexity. Your job title is:',
+    'I checked with Gemini, Copilot, and DeepSeek. Your job title is:',
+    'I checked with ChatGPT, Mistral, and Llama. Your job title is:',
+    'I checked with all the models. Your job title is:',
+    'The model has spoken. Your job title is:',
+    'I ran the numbers. Your job title is:',
+    'The algorithm agrees. Your job title is:',
+    'Processing your existential crisis. Your job title is:',
+    'After 0.003 seconds of deep thinking, your job title is:',
+    'After 0.0004 seconds of advanced reasoning, your job title is:',
+    'After 0.001 seconds of careful analysis, your job title is:',
+    'After 0.00007 seconds of contextual reasoning, your job title is:',
+    'After 0.0000002 seconds of layered analysis, your job title is:',
+    'After 0.002 seconds of reasoning, your job title is:',
+    'After 0.0001 seconds of deep reasoning, your job title is:',
+    'After 0.00003 seconds of long-horizon reasoning, your job title is:',
+    'After 0.005 seconds of multimodal reasoning, your job title is:',
+    'After 0.0008 seconds of tool-augmented reasoning, your job title is:',
+    'After 0.00001 seconds of real-world reasoning, your job title is:',
+    'After 0.0002 seconds of synthesizing context, your job title is:',
+    'After 0.007 seconds of understanding intent, your job title is:',
+    'After 0.0006 seconds of processing your request, your job title is:',
+    'After 0.00009 seconds of evaluating the context, your job title is:',
+    'I consulted 47 billion parameters. Your job title is:',
+  ];
   const [creatorTitles, setCreatorTitles] = useState({ natalia: '', isak: '' });
 
   // Extract first 2 words from a title for comparison
@@ -95,6 +125,7 @@ export default function App() {
       setCurrentTitle(title);
       setCurrentEmoji(emoji);
       setCurrentScheme(getRandomScheme());
+      setCurrentIntro(llmIntros[Math.floor(Math.random() * llmIntros.length)]);
       setIsAnimating(false);
     }, 150);
   };
@@ -105,6 +136,7 @@ export default function App() {
     setCurrentTitle(initial.title);
     setCurrentEmoji(initial.emoji);
     setCurrentScheme(getRandomScheme());
+    setCurrentIntro(llmIntros[Math.floor(Math.random() * llmIntros.length)]);
     setCreatorTitles({
       natalia: getRandomTitle().title,
       isak: getRandomTitle().title
@@ -325,9 +357,9 @@ export default function App() {
               className="transition-opacity duration-150"
               style={{ opacity: isAnimating ? 0.3 : 1 }}
             >
-              <div style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', lineHeight: 1, marginBottom: '0.3em' }}>
-                {currentEmoji}
-              </div>
+              <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.25rem)', opacity: 0.7, marginBottom: '0.5em', fontWeight: 400, letterSpacing: '0.01em' }}>
+                {currentIntro}
+              </p>
               <h1
                 className="text-[48px] leading-[52px] min-[744px]:text-[72px] min-[744px]:leading-[1.15] lg:text-[96px] lg:leading-[1.15]"
                 style={{
