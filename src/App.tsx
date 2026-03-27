@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Copy, Check } from 'lucide-react';
 import { generateTitle } from './lib/generateTitle';
 
 const colorSchemes = [
@@ -61,7 +60,6 @@ export default function App() {
   const [currentScheme, setCurrentScheme] = useState(colorSchemes[0]);
   const [isAnimating, setIsAnimating] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
-  const [copied, setCopied] = useState(false);
   const [creatorTitles, setCreatorTitles] = useState({ natalia: '', isak: '' });
 
   // Extract first 2 words from a title for comparison
@@ -83,14 +81,6 @@ export default function App() {
     }
 
     return result;
-  };
-
-  const handleCopy = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    navigator.clipboard.writeText(currentTitle).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
   };
 
   const getRandomScheme = () => {
@@ -348,14 +338,6 @@ export default function App() {
               >
                 {currentTitle}
               </h1>
-              <button
-                onClick={handleCopy}
-                className="mt-4 transition-opacity duration-150 hover:opacity-70"
-                style={{ opacity: 0.5, background: 'transparent', border: 'none', padding: 0, cursor: 'pointer', color: currentScheme.text }}
-                aria-label="Copy title"
-              >
-                {copied ? <Check size={22} /> : <Copy size={22} />}
-              </button>
             </div>
           </div>
         </div>
