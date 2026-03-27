@@ -82,7 +82,6 @@ export default function App() {
     'After 0.0001 seconds of deep reasoning, your job title is:',
     'After 0.00003 seconds of long-horizon reasoning, your job title is:',
     'After 0.005 seconds of multimodal reasoning, your job title is:',
-    'After 0.0008 seconds of tool-augmented reasoning, your job title is:',
     'After 0.00001 seconds of real-world reasoning, your job title is:',
     'After 0.0002 seconds of synthesizing context, your job title is:',
     'After 0.007 seconds of understanding intent, your job title is:',
