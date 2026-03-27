@@ -352,32 +352,18 @@ const VOICE_PATTERNS: Array<[(rng: () => number) => string, number]> = [
   [studioRealismPattern, 1],
 ]
 
-const emojiMap: Array<{ keywords: string[]; emojis: string[] }> = [
-  { keywords: ['robot', 'autonomous', 'synthetic', 'generative'], emojis: ['🤖', '🧬', '⚡'] },
-  { keywords: ['ai', 'machine', 'model', 'neural', 'algorithm', 'prompt'], emojis: ['🧠', '🤖', '💡'] },
-  { keywords: ['chaos', 'error', 'debugging', 'fighting', 'preventing', 'recursive'], emojis: ['💥', '🔥', '⚠️'] },
-  { keywords: ['poet', 'dreamer', 'mystic', 'soul', 'alchemist', 'conjuring', 'manifesting'], emojis: ['✨', '🌀', '💫'] },
-  { keywords: ['ethics', 'ethical', 'bias', 'governance', 'diplomat', 'mediating'], emojis: ['⚖️', '🌿', '🕊️'] },
-  { keywords: ['research', 'researcher', 'studying', 'observing', 'investigating'], emojis: ['🔬', '🧪', '📡'] },
-  { keywords: ['systems', 'architect', 'engineer', 'infrastructure', 'framework'], emojis: ['⚙️', '🏗️', '🔧'] },
-  { keywords: ['data', 'quantifying', 'measuring', 'calibrating', 'parsing'], emojis: ['📊', '🔢', '💾'] },
-  { keywords: ['human', 'empathy', 'emotion', 'feeling', 'intuition', 'curiosity'], emojis: ['💙', '🫂', '🧡'] },
-  { keywords: ['future', 'emerging', 'autonomous', '2033'], emojis: ['🚀', '🌐', '🛸'] },
-  { keywords: ['culture', 'cultural', 'anthropologist', 'diplomat', 'social'], emojis: ['🌍', '🤝', '🎭'] },
-  { keywords: ['design', 'designer', 'visual', 'interface', 'brand', 'creative'], emojis: ['🎨', '✏️', '🖌️'] },
-  { keywords: ['strategy', 'strategist', 'navigating', 'balancing', 'bridging'], emojis: ['♟️', '🎯', '🧭'] },
-  { keywords: ['sanity', 'patience', 'burnout', 'existential', 'dread', 'imposter'], emojis: ['😅', '🙃', '💀'] },
-  { keywords: ['wonder', 'beauty', 'poetry', 'meditation', 'mythology', 'transcendence'], emojis: ['🌸', '🔮', '🌙'] },
-  { keywords: ['workflow', 'hybrid', 'adaptive', 'automated', 'automation'], emojis: ['🔄', '⚡', '🛠️'] },
+const emojiPool = [
+  '🤖','🧠','💡','⚡','🔥','💥','✨','🌀','💫','🎨',
+  '🖌️','✏️','🔬','🧪','📊','💾','⚙️','🏗️','🔧','🎯',
+  '♟️','🧭','🌍','🤝','🎭','💙','🧡','💜','🌸','🔮',
+  '🌙','🚀','🛸','🌐','⚖️','🕊️','🌿','🧬','📡','🫂',
+  '🌊','🦋','🧩','🎲','🪄','🔭','🌈','🪐','🌋','🧲',
+  '💎','🎵','📐','🗺️','🧶','🔑','🧿','🫧','🌵','🦜',
+  '🪩','💻','🖥️','🎪','🦚','🎠','🌺','🧊','🪞','🎬',
 ]
 
-const getEmoji = (title: string, rng: () => number): string => {
-  const lower = title.toLowerCase()
-  const matches = emojiMap.filter(({ keywords }) => keywords.some(kw => lower.includes(kw)))
-  const pool = matches.length > 0
-    ? matches.flatMap(m => m.emojis)
-    : ['✦', '◈', '⬡', '◉', '⟁'] // neutral fallback
-  return pool[Math.floor(rng() * pool.length)]
+const getEmoji = (_title: string, rng: () => number): string => {
+  return emojiPool[Math.floor(rng() * emojiPool.length)]
 }
 
 export const generateTitle = (seed = Date.now()): { title: string; emoji: string } => {
